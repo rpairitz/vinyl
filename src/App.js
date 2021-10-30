@@ -1,24 +1,11 @@
-import logo from './logo.svg';
+import Components from "./Components/Components.js";
 import './App.css';
+
+// TODO: initialze Sequelize ORM to interface w/ MySQL DBMS; parse SDK?
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Components />
   );
 }
 
