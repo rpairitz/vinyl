@@ -1,8 +1,8 @@
-import Hero from "./Hero.js";
 
 const Home = () => {
+    // TODO: use SongService to search songs and update state
     return (
-        <Hero/>
+        <h1>This is the home component</h1>
     );
 }
 

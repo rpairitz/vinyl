@@ -14,7 +14,9 @@ const Components = () => {
             <Router>
                 <Nav />
                 <Switch>
-                    <Route exact path="/" component={Home}>
+                    <Route exact path="/">
+                        {/*include Home as a child component instead
+                        so it will actually appear*/}
                         <Home />
                     <Redirect to="/" />
                     </Route>
