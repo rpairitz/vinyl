@@ -7,6 +7,7 @@ import {
 import { Nav } from "./Nav/Nav.js";
 import Home from "./Home/Home.js";
 import Project from "./Project/Project.js";
+import DevPlan from "./DevPlan/DevPlan.js";
 
 const Components = () => {
     return (
@@ -21,6 +22,7 @@ const Components = () => {
                     <Redirect to="/" />
                     </Route>
                     <Route path="/project" component={Project}/>
+                    <Route path="/devplan" component={DevPlan}/>
                 </Switch>
             </Router>
         </div>
