@@ -16,9 +16,9 @@ const DevPlan = () => {
         Our only FDs are based on the primary keys.
       </p>
       <ul>
-        <li>Songs: id -> title, artist, peak_rank</li>
-        <li>RelatedSongs: id_1, id_2 -> score</li>
-        <li>ChartPositions: id, date -> rank, weeks_top_100, last rank</li>
+        <li>Songs: id -{">"} title, artist, peak_rank</li>
+        <li>RelatedSongs: id_1, id_2 -{">"} score</li>
+        <li>ChartPositions: id, date -{">"} rank, weeks_top_100, last rank</li>
       </ul>
       <br />
       <h2>Technical Choices</h2>
