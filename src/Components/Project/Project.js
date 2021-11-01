@@ -1,11 +1,9 @@
-import Hero from "./Hero.js";
 import hero_img from "../../img/billboard.jpg";
 import er_diagram_img from "../../img/er-diagram-revised.jpeg";
 
 const Project = () => {
     return (
         <> {/* this is so we don't get error related to a single parent element */}
-        <Hero/>
         <div class="bordered">
             <h1 class="head">Vinyl: A Charting Summary</h1>
             <p class="head">
@@ -16,8 +14,8 @@ const Project = () => {
             </p>
         </div>
         <br />
-        <img id="main" />
-        <img id="fixed" src={hero_img} />
+        <img id="main" alt=""/>
+        <img id="fixed" src={hero_img} alt=""/>
 
         <br />
         <div class="bordered">
@@ -93,7 +91,7 @@ const Project = () => {
             </p>
             <br />
             <h2>ER Diagram</h2>
-            <img id="er" src={er_diagram_img} />
+            <img id="er" src={er_diagram_img} alt="ER diagram"/>
             <p>
         Each song has a unique song id we assign to it, as well as a title,
         artist, and peak rank attributes. The data types will be uuid, varchar,
