@@ -8,6 +8,7 @@ import { Nav } from "./Nav/Nav.js";
 import Home from "./Home/Home.js";
 import Project from "./Project/Project.js";
 import DevPlan from "./DevPlan/DevPlan.js";
+import Demo from "./Demo/Demo.js";
 
 const Components = () => {
     return (
@@ -23,6 +24,9 @@ const Components = () => {
                     </Route>
                     <Route path="/project" component={Project}/>
                     <Route path="/devplan" component={DevPlan}/>
+                    <Route path="/demo">
+                        <Demo />
+                    </Route>
                 </Switch>
             </Router>
         </div>

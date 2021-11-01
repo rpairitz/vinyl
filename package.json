@@ -1,6 +1,7 @@
 {
   "name": "vinyl",
   "version": "0.1.0",
+  "homepage": "http://db.cse.nd.edu/cse30246/vinyl",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
