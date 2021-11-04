@@ -14,7 +14,7 @@ const SearchForm = ({ searchSong, onChange, onSubmit }) => {
                         id="search-string-input"
                         value={searchSong.string}
                         onChange={onChange}
-                        name="searchString"
+                        name="string"
                     />
                 </div>
                 <div className="form-group">
@@ -26,7 +26,7 @@ const SearchForm = ({ searchSong, onChange, onSubmit }) => {
                         id="search-date-input"
                         value={searchSong.date}
                         onChange={onChange}
-                        name="searchDate"
+                        name="date"
                     />
                 </div>
                 <div className="form-group">

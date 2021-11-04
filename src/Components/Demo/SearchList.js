@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import SearchForm from 'SearchForm.js';
-import {searchSongs} from '../../src/Services/SongService.js';
+import SearchForm from './SearchForm.js';
+import {searchSongs} from '../../Services/SongService.js';
 
 // stateful parent component, which holds state data to be rendered in HTML
 const SearchList = () => {
@@ -40,8 +40,9 @@ const SearchList = () => {
     const onChangeHandler = (e) => {
         e.preventDefault();
         console.log(e.target); // log entire input
-        // continuously update value to be searched on form submission
-        // TODO: figure out what this is doing (from lecture 16 AuthRegister.js)
+        // continuously update value to be searched on form submission:
+        // this updates the form inputs with updated values when the input is changed,
+        // based on the tag attributes (name, value)
         const { name, value: newValue} = e.target;
         console.log(newValue);
 
