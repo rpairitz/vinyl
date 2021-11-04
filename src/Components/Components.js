@@ -9,6 +9,7 @@ import Home from "./Home/Home.js";
 import Project from "./Project/Project.js";
 import DevPlan from "./DevPlan/DevPlan.js";
 import Demo from "./Demo/Demo.js";
+import SearchList from "./Demo/SearchList.js";
 
 const Components = () => {
     return (
@@ -26,6 +27,7 @@ const Components = () => {
                     <Route path="/devplan" component={DevPlan}/>
                     <Route path="/demo">
                         <Demo />
+                        <SearchList />
                     </Route>
                 </Switch>
             </Router>
