@@ -11,5 +11,8 @@ export const searchSongs = (searchSong) => {
    return axios.get(API_PATH, searchSong).then((response) => {
        console.log(response);
        return response.data;
+   })
+   .catch((error) => {
+       alert(`Error: ${error.message}`);
    });
 };

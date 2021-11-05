@@ -1,5 +1,7 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+
 $servername = "localhost";
 $username = "wgentry";
 $password = "12345";
