@@ -8,7 +8,7 @@ const API_PATH = Env.API_PATH;
 // would need to also break up in SearchForm.js and SearchList.js
 export const searchSongs = (searchSong) => {
     // TODO: register axios with onSubmit event to search the db
-   axios.get(API_PATH, searchSong).then((response) => {
+   return axios.get(API_PATH, searchSong).then((response) => {
        console.log(response);
        return response.data;
    });

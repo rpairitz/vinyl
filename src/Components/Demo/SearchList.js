@@ -14,6 +14,9 @@ const SearchList = () => {
     // flag in the state to watch for add updates
     const [search, setSearch] = useState(false) // search is initially false
 
+    // TODO: add useEffect to run on page load to call getAllSongs to set the state array
+    // so when user enters, it displays all songs, then searching filters by criteria
+
     // when the user changes the state var flag (i.e. onSubmit), useEffect
     useEffect(() => {
         if (searchSong && search) {
