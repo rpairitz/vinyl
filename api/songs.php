@@ -36,8 +36,8 @@ $response = $conn->query($query);
 
 // die if failed
 if (!$response){
-	http_response_code(404);
-	die(mysqli_error($con));
+	http_response_code(500);
+	//die(mysqli_error($con));
 }
 else{
 	$data = json_encode($response);
