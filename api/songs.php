@@ -14,6 +14,11 @@ $method = $_SERVER['REQUEST_METHOD'];
 $par = file_get_contents("php://input"); // parameters; should give searchSong object for instance, in case of search
 $arr = json_decode($par); // parameter broken into an array
 
+// TEST
+echo $method;
+echo $par;
+echo $arr;
+
 // check action
 switch ($method){
 	case 'GET':
