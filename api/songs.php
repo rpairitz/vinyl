@@ -16,8 +16,11 @@ $arr = json_decode($par); // parameter broken into an array
 
 // TEST
 echo $method;
+print_r($method);
 echo $par;
+print_r($par);
 echo $arr;
+print_r($arr);
 
 // check action
 switch ($method){
