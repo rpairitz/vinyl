@@ -42,16 +42,7 @@ const SearchList = () => {
         console.log(e.target); // log entire input
         // continuously update value to be searched on form submission:
         // this updates the form inputs with updated values when the input is changed,
-        // based on the tag attributes (name, value)
-        /*
-        const { name, value: newValue} = e.target;
-        console.log(newValue);
-
-        setSearchString({
-            ...searchString,
-            [name]: newValue
-        });
-        */
+        // based on the value tag attribute
         setSearchString(e.target.value);
     };
 
