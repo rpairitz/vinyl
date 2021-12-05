@@ -1,5 +1,5 @@
 // stateless child component
-const SearchForm = ({ searchSong, onChange, onSubmit }) => {
+const SearchForm = ({ searchString, onChange, onSubmit }) => {
     return (
         <div>
             <h2>Song Search</h2>
@@ -11,7 +11,7 @@ const SearchForm = ({ searchSong, onChange, onSubmit }) => {
                         type="text"
                         className="form-control"
                         id="search-string-input"
-                        value={searchSong.string}
+                        value={searchString}
                         onChange={onChange}
                         name="string"
                     />
