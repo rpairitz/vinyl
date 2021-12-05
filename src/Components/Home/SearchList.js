@@ -43,6 +43,7 @@ const SearchList = () => {
         // continuously update value to be searched on form submission:
         // this updates the form inputs with updated values when the input is changed,
         // based on the tag attributes (name, value)
+        /*
         const { name, value: newValue} = e.target;
         console.log(newValue);
 
@@ -50,7 +51,8 @@ const SearchList = () => {
             ...searchString,
             [name]: newValue
         });
-        //setSearchSong(e.target.value); // old
+        */
+        setSearchString(e.target.value);
     };
 
     return (
