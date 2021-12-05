@@ -9,7 +9,7 @@ import Home from "./Home/Home.js";
 import Project from "./Project/Project.js";
 import DevPlan from "./DevPlan/DevPlan.js";
 import Demo from "./Demo/Demo.js";
-import SearchList from "./Demo/SearchList.js";
+import SearchList from "./Home/SearchList.js";
 
 const Components = () => {
     return (
