@@ -17,18 +17,6 @@ const SearchForm = ({ searchSong, onChange, onSubmit }) => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Date</label>
-                    <br />
-                    <input
-                        type="date"
-                        className="form-control"
-                        id="search-date-input"
-                        value={searchSong.date}
-                        onChange={onChange}
-                        name="date"
-                    />
-                </div>
-                <div className="form-group">
                     <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>
                         Search
                     </button>
