@@ -65,17 +65,17 @@ const SearchList = () => {
             />
             {/* TODO: display each result */}
             {songs.length > 0 && (
-                <ul>
-                    {songs.map((song) =>
-                        <li key={song.id}>{/*TODO: get, to display songinfo*/}
-                            {/* e.g. {song.get("name")}*/}
-                            Title: {song.title} 
-                            Artist: {song.artist} 
-                            Weeks on Billboard 100: {song.total_weeks_on_chart}
-                            Peak Rank: {song.peak_rank}
-                        </li>
-                    )}
-                </ul>
+		<ul>
+			{songs.map((song) => (
+				<li key={song.id}>
+					Title: {song.title}
+					Artist: {song.artist}
+					Album: {song.album}
+					Peak Rank: {song.peak_rank}
+					Weeks on Billboard 100: {song.total_weeks_on_chart}
+				</li>
+			))}
+		</ul>
             )}
         </div>
     );

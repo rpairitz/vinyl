@@ -8,7 +8,16 @@ const API_PATH = Env.API_PATH;
 // would need to also break up in SearchForm.js and SearchList.js
 export const searchSongs = (searchSong) => {
     // TODO: register axios with onSubmit event to search the db
-   return axios.get(API_PATH, searchSong).then((response) => {
+   // format params to JSON object to be sent using axios and received by PHP in proper format for decoding
+   //var params = new URLSearchParams();
+   //params.append('string', searchSong.string);
+   // try to test axios API
+   /*
+   return jest.mock('axios').test('Example',async() => {
+	   axios.get.mockImplementation(API_PATH);
+   });
+   */
+   return axios.get(API_PATH, {params: {string: searchSong.string}}).then((response) => {
        console.log(response);
        return response.data;
    })
