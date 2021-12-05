@@ -6,7 +6,10 @@ import {searchSongs} from '../../Services/SongService.js';
 const SearchList = () => {
     // variables in the state to hold data
     const [songs, setSongs] = useState([]) // initial state: empty song list
-    const [searchString, setSearchString] = useState(""); // just for holding form data to be submitted for search
+    const [searchSong, setSearchSong] = useState({
+        string: "",
+        date: ""
+    }); // just for holding form data to be submitted for search
 
     // flag in the state to watch for add updates
     const [search, setSearch] = useState(false) // search is initially false
@@ -16,18 +19,18 @@ const SearchList = () => {
 
     // when the user changes the state var flag (i.e. onSubmit), useEffect
     useEffect(() => {
-        if (searchString && search) {
+        if (searchSong && search) {
             // TODO: make search call using SearchService GET method to update songs state array
             // TODO: setSearch(false);
             // look at lecture 14 MainList.js and LearnService.js
             // e.g.
-            searchSongs(searchString).then((songList) => {
+            searchSongs(searchSong).then((songList) => {
                 setSearch(false); // revert state var
                 // render the resulting list of songs from the axios request (i.e. the updated state)
                 setSongs(songList)
             })
         }
-    }, [songs,searchString,search]); // dependency array (songs, search) triggers useEffect on change
+    }, [songs,searchSong,search]); // dependency array (songs, search) triggers useEffect on change
 
     // trigger useEffect to update state with resulting song list on form submission
     const onSubmitHandler = (e) => {
@@ -46,21 +49,21 @@ const SearchList = () => {
         const { name, value: newValue} = e.target;
         console.log(newValue);
 
-        setSearchString({
-            ...searchString,
+        setSearchSong({
+            ...searchSong,
             [name]: newValue
         });
-        //setSearchString(e.target.value); // old
+        //setSearchSong(e.target.value); // old
     };
 
     return (
         <div>
             <SearchForm
-                searchString={searchString}
+                searchSong={searchSong}
                 onChange={onChangeHandler}
                 onSubmit={onSubmitHandler}
             />
-            {/* display each result */}
+            {/* TODO: display each result */}
             {songs.length > 0 && (
 		<ul>
 			{songs.map((song) => (
