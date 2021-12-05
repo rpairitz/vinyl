@@ -21,6 +21,7 @@ const Components = () => {
                         {/*include Home as a child component instead
                         so it will actually appear*/}
                         <Home />
+                        <SearchList/>
                     <Redirect to="/" />
                     </Route>
                     <Route path="/project" component={Project}/>
