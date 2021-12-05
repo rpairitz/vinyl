@@ -5,11 +5,11 @@ import {
     Redirect
 } from "react-router-dom";
 import { Nav } from "./Nav/Nav.js";
-import Home from "./Search/Home.js";
+import Home from "./Home/Home.js";
 import Project from "./Project/Project.js";
 import DevPlan from "./DevPlan/DevPlan.js";
 import Demo from "./Demo/Demo.js";
-import SearchList from "./Search/SearchList.js";
+import SearchList from "./Home/SearchList.js";
 
 const Components = () => {
     return (
