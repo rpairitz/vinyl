@@ -23,11 +23,12 @@ case 'GET':
 	//$string = $arr['string'];
 	$string = $_GET['string'];
 	if ($string){
-		$query = "select * from songs where title like '%$string%' or artist like '%$string%'";
+		$query = "select * from songs where title like '%$string%' or artist like '%$string%' order by
+			peak_rank asc";
 	}
 	else {
 		// empty search; show all songs, limit
-		$query = "select * from songs limit 50";
+		$query = "select * from songs order by total_weeks_on_chart desc limit 50";
 	}
 	$result = $conn->query($query);
 	if (!$result){
