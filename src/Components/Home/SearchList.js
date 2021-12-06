@@ -13,19 +13,33 @@ const SearchList = () => {
 
     // TODO: add useEffect to run on page load to call getAllSongs to set the state array
     // so when user enters, it displays all songs, then searching filters by criteria
-
-    // when the user changes the state var flag (i.e. onSubmit), useEffect
     useEffect(() => {
-        if (searchString && search) {
-            // TODO: make search call using SearchService GET method to update songs state array
-            // TODO: setSearch(false);
+	    searchSongs("").then((songList) => {
+		    setSongs(songList);
+	    });
+    },[]);
+
+    // when the user changes the state var flag (i.e. onSubmit), useEffect to change state of songs
+    useEffect(() => {
+        if (search) {
+            // make search call using SearchService GET method to update songs state array
+            // setSearch(false);
             // look at lecture 14 MainList.js and LearnService.js
             // e.g.
-            searchSongs(searchString).then((songList) => {
-                setSearch(false); // revert state var
-                // render the resulting list of songs from the axios request (i.e. the updated state)
-                setSongs(songList)
-            })
+	    if (!searchString){
+            	searchSongs("").then((songList) => {
+                	setSearch(false); // revert state var
+                	// render the resulting list of songs from the axios request (i.e. the updated state)
+                	setSongs(songList)
+            	})
+	    }
+	    else{
+            	searchSongs(searchString).then((songList) => {
+                	setSearch(false); // revert state var
+                	// render the resulting list of songs from the axios request (i.e. the updated state)
+                	setSongs(songList)
+            	})
+	    }
         }
     }, [songs,searchString,search]); // dependency array (songs, search) triggers useEffect on change
 

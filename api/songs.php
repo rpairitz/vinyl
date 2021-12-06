@@ -22,8 +22,13 @@ switch ($method){
 case 'GET':
 	//$string = $arr['string'];
 	$string = $_GET['string'];
-	//print_r($string);
-	$query = "select * from songs where title like '%$string%' or artist like '%$string%'";
+	if ($string){
+		$query = "select * from songs where title like '%$string%' or artist like '%$string%'";
+	}
+	else {
+		// empty search; show all songs, limit
+		$query = "select * from songs limit 50";
+	}
 	$result = $conn->query($query);
 	if (!$result){
 		// TODO: report error
