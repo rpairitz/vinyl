@@ -13,11 +13,12 @@ const SearchList = () => {
     // flag in the state to watch for add updates
     const [search, setSearch] = useState(false) // search is initially false
 
-    // TODO: add useEffect to run on page load to call getAllSongs to set the state array
+    // add useEffect to run on page load to call getAllSongs to set the state array
     // so when user enters, it displays all songs, then searching filters by criteria
     useEffect(() => {
 	    searchSongs("").then((songList) => {
 		    setSongs(songList);
+		    console.log(songs);
 	    });
     },[]);
 
@@ -32,14 +33,14 @@ const SearchList = () => {
             	searchSongs("").then((songList) => {
                 	setSearch(false); // revert state var
                 	// render the resulting list of songs from the axios request (i.e. the updated state)
-                	setSongs(songList)
+                	setSongs(songList);
             	})
 	    }
 	    else{
             	searchSongs(searchString).then((songList) => {
                 	setSearch(false); // revert state var
                 	// render the resulting list of songs from the axios request (i.e. the updated state)
-                	setSongs(songList)
+                	setSongs(songList);
             	})
 	    }
         }
@@ -69,7 +70,7 @@ const SearchList = () => {
                 onChange={onChangeHandler}
                 onSubmit={onSubmitHandler}
             />
-	    <Route path="/song/:id"><SongDetail songs={songs}/></Route>
+	    {/*<Route exact path="/song/:id"><SongDetail songs={songs}/></Route>*/}
             {/* display each result */}
             {songs.length > 0 && (
 		<ul>
