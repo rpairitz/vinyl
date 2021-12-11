@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import {Route,Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import SearchForm from './SearchForm.js';
-import SongDetail from './SongDetail.js';
 import {searchSongs} from '../../Services/SongService.js';
 
 // stateful parent component, which holds state data to be rendered in HTML
@@ -70,17 +69,21 @@ const SearchList = () => {
                 onChange={onChangeHandler}
                 onSubmit={onSubmitHandler}
             />
-	    {/*<Route exact path="/song/:id"><SongDetail songs={songs}/></Route>*/}
             {/* display each result */}
             {songs.length > 0 && (
 		<ul>
 			{songs.map((song) => (
 				<li key={song.id}>
-					<h4>Title: <Link to={{pathname:`/songs/${song.id}`,state: {song: song}}}>{song.title}</Link></h4>
+				<Link to={{pathname:`/songs/${song.id}`,state: {song: song}}}>
+					<img className="list-image" src={song.album_image_url} width="2%" alt="album-cover"/> &#160;
+					<b>{song.title}</b> &#160;
 					Artist: {song.artist} &#160;
 					Album: {song.album} &#160;
 					Peak Rank: {song.peak_rank} &#160;
 					Weeks on Billboard 100: {song.total_weeks_on_chart}
+					<br />
+					<br/>
+				</Link>
 				</li>
 			))}
 		</ul>
