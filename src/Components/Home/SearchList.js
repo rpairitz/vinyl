@@ -76,7 +76,7 @@ const SearchList = () => {
 		<ul>
 			{songs.map((song) => (
 				<li key={song.id}>
-					<h4>Title: <Link to={`/song/${song.id}`}>{song.title}</Link></h4>
+					<h4>Title: <Link to={{pathname:`/songs/${song.id}`,state: {song: song}}}>{song.title}</Link></h4>
 					Artist: {song.artist} &#160;
 					Album: {song.album} &#160;
 					Peak Rank: {song.peak_rank} &#160;

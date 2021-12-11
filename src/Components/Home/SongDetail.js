@@ -1,7 +1,23 @@
-import {useParams} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
+// TODO: import getRecommendedSongs from service
 
-const SongDetail = ({songs}) => {
-	const {id} = useParams(); // song title from the route
+const SongDetail = () => {
+	// get song state through useLocation hook
+	const location = useLocation(); // song title from the route
+	const song = location.state.song;
+
+	// TODO: create state variable relatedSongs for holding related song data
+	
+	// TODO: create useEffect for updating relatedSongs state var
+	
+	return (
+		<div>
+			<div>
+				<img src={song.album_image_url} width="500px" align="center"/>
+			</div>
+		</div>
+	);
+	/*
 	console.log(songs);
 
 	return (
@@ -19,5 +35,6 @@ const SongDetail = ({songs}) => {
 			))}
 		</div>
 	);
+	*/
 };
 export default SongDetail;
