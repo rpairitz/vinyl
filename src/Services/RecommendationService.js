@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as Env from "../environments";
 
 // API_PATH var to hold backend endpoint 
-const API_PATH = Env.API_PATH;
+const API_PATH = Env.RECS_API_PATH;
 
 export const getRecommended = (songId) => {
    // use axios to interface with backend to issue queries and retrieve async data from db
