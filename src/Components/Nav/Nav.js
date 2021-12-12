@@ -11,6 +11,10 @@ export function Nav() {
                 <li><Link to="/project">Project</Link></li>
                 <li><Link to="/devplan">Development Plan</Link></li>
                 <li><Link to="/demo">Demo</Link></li>
+		<li className="menu-item" id="small" fontSize="0.01%">
+			Want us to predict what song you were
+			conceived to?&#160;<Link to="/prediction">Click here.</Link>
+		</li>
             </ul>
         </nav>
     );
