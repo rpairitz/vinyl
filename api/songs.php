@@ -25,12 +25,11 @@ case 'GET':
 	//$string = $arr['string'];
 	$string = $_GET['string'];
 	if ($string){
-		$query = "select * from songs where title like '%$string%' or artist like '%$string%' order by
-			peak_rank asc";
+		$query = "select s.id, s.title, s.album_id, a.name as album, a.image_url as album_image_url, s.artist_id, s.artist, s.peak_rank, s.total_weeks_on_chart from songs s, albums a where s.album_id = a.id and (s.title like '%$string%' or s.artist like '%$string%') order by s.peak_rank asc;";
 	}
 	else {
 		// empty search; show all songs, limit
-		$query = "select * from songs order by total_weeks_on_chart desc limit 50";
+		$query = "select s.id, s.title, s.album_id, a.name as album, a.image_url as album_image_url, s.artist_id, s.artist, s.peak_rank, s.total_weeks_on_chart from songs s, albums a where s.album_id = a.id order by s.total_weeks_on_chart desc limit 50;";
 	}
 	$result = $conn->query($query);
 	if (!$result){
@@ -39,12 +38,13 @@ case 'GET':
 	else if ($method == 'GET'){
 		$rows = array();
 		while($r = $result->fetch_assoc()){
+			/*
 			$id = $r['id'];
 			$artist_id = $r['artist_id'];
 			$album_id = $r['album_id'];
 			$title = $r['title'];
 			$artist = $r['artist'];
-			$album = $r['album'];
+			$album = $r['name'];
 			$peak_rank = $r['peak_rank'];
 			$weeks = $r['total_weeks_on_chart'];
 			$duration = $r['duration_ms'];
@@ -65,7 +65,7 @@ case 'GET':
 			$norm_tempo = $r['normal_tempo'];
 			$norm_sig = $r['normal_time_signature'];
 			$norm_pop = $r['normal_popularity'];
-			$album_img = $r['album_image_url'];
+			$album_img = $r['image_url'];
 			$output = array('id'=>$id,'artist_id'=>$artist_id,'album_id'=>$album_id,
 				'title'=>$title,'artist'=>$artist,'album'=>$album,'peak_rank'=>$peak_rank,
 				'total_weeks_on_chart'=>$weeks,'duration_ms'=>$duration,'explicit'=>$explicit,
@@ -77,11 +77,12 @@ case 'GET':
 				'normal_time_signature'=>$norm_sig,'normal_popularity'=>$norm_pop,
 				'album_image_url'=>$album_img
 			);
+			 */
 			// push output to rows array
 			/* note: need to replace â€™; encoding assumed ISO-8859-1, so when query result is set
 			 * to UTF-8, right single quotes (') are set to â€™ by mistake
 			 */
-			array_push($rows, str_replace('â€™',"'",$output));
+			array_push($rows, str_replace('â€™',"'",$r));
 		}
 		echo json_encode($rows, JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE);
 	}
