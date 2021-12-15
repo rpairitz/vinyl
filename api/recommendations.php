@@ -31,7 +31,7 @@ case 'GET':
 			/* note: need to replace â€™; encoding assumed ISO-8859-1, so when query result is set
 			* to UTF-8, right single quotes (') are set to â€™ by mistake
 			*/
-			$output = array('id'=>$id,'title'=>$title,'album_id'=>$album_id,
+			$output = array('id'=>$id,'title'=>$title,'album_id'=>$album_id,'album'=>$album,
 				'album_image_url'=>$album_image_url,'artist_id'=>$artist_id,'artist'=>$artist,
 				'peak_rank'=>$peak_rank,'total_weeks_on_chart'=>$weeks);
 			array_push($rows, str_replace('â€™',"'",$output));
