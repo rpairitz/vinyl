@@ -11,78 +11,40 @@ $conn = new mysqli($servername, $username, $password) or die ('Could not connect
 $conn->set_charset("utf8");
 
 mysqli_select_db($conn, $username);
-//print_r($_SERVER);
-//print_r($_GET);
 $method = $_SERVER['REQUEST_METHOD'];
-//print_r($_GET);
-//$par = file_get_contents("php://input"); // parameters passed from axios service
-//var_dump($par);
-//$arr = json_decode(utf8_encode($par)); // JSON broken into an array
-//print_r(json_last_error());
-//var_dump($arr);
 switch ($method){
 case 'GET':
 	//$string = $arr['string'];
 	$string = $_GET['string'];
+	// prepare the associated query against sql injection
 	if ($string){
-		$query = "select s.id, s.title, s.album_id, a.name as album, a.image_url as album_image_url, s.artist_id, s.artist, s.peak_rank, s.total_weeks_on_chart from songs s, albums a where s.album_id = a.id and (s.title like '%$string%' or s.artist like '%$string%') order by s.peak_rank asc;";
+		$query = $conn->prepare("select s.id, s.title, s.album_id, a.name as album, a.image_url as album_image_url, s.artist_id, s.artist, s.peak_rank, s.total_weeks_on_chart from songs s, albums a where s.album_id = a.id and (s.title like ? or s.artist like ?) order by s.peak_rank asc;");
+		if ($query){
+			$param = '%' . $string . '%'; // need to concatenate wildcards to string to add to query
+			$query->bind_param("ss",$param,$param);
+		}
 	}
 	else {
 		// empty search; show all songs, limit
-		$query = "select s.id, s.title, s.album_id, a.name as album, a.image_url as album_image_url, s.artist_id, s.artist, s.peak_rank, s.total_weeks_on_chart from songs s, albums a where s.album_id = a.id order by s.total_weeks_on_chart desc limit 50;";
+		$query = $conn->prepare("select s.id, s.title, s.album_id, a.name as album, a.image_url as album_image_url, s.artist_id, s.artist, s.peak_rank, s.total_weeks_on_chart from songs s, albums a where s.album_id = a.id order by s.total_weeks_on_chart desc limit 50;");
 	}
-	$result = $conn->query($query);
-	if (!$result){
-		// TODO: report error
-	}
-	else if ($method == 'GET'){
+
+	if ($query){
+		$query->execute();
+		$query->bind_result($id,$title,$album_id,$album,$album_image_url,$artist_id,$artist,
+			$peak_rank,$weeks);
+		$query->store_result();
+
 		$rows = array();
-		while($r = $result->fetch_assoc()){
-			/*
-			$id = $r['id'];
-			$artist_id = $r['artist_id'];
-			$album_id = $r['album_id'];
-			$title = $r['title'];
-			$artist = $r['artist'];
-			$album = $r['name'];
-			$peak_rank = $r['peak_rank'];
-			$weeks = $r['total_weeks_on_chart'];
-			$duration = $r['duration_ms'];
-			$explicit = $r['explicit'];
-			$date = $r['release_date'];
-			$danceability = $r['danceability'];
-			$energy = $r['energy'];
-			$loudness = $r['loudness'];
-			$mode = $r['mode'];
-			$speech = $r['speechiness'];
-			$acoustic = $r['acousticness'];
-			$instrumental = $r['instrumentalness'];
-			$liveness = $r['liveness'];
-			$valence = $r['valence'];
-			$tempo = $r['tempo'];
-			$sig = $r['time_signature'];
-			$norm_loudness = $r['normal_loudness'];
-			$norm_tempo = $r['normal_tempo'];
-			$norm_sig = $r['normal_time_signature'];
-			$norm_pop = $r['normal_popularity'];
-			$album_img = $r['image_url'];
-			$output = array('id'=>$id,'artist_id'=>$artist_id,'album_id'=>$album_id,
-				'title'=>$title,'artist'=>$artist,'album'=>$album,'peak_rank'=>$peak_rank,
-				'total_weeks_on_chart'=>$weeks,'duration_ms'=>$duration,'explicit'=>$explicit,
-				'release_date'=>$date,'danceability'=>$danceability,'energy'=>$energy,
-				'loudness'=>$loudness,'mode'=>$mode,'speechiness'=>$speech,
-				'acousticness'=>$acoustic,'instrumentalness'=>$instrumental,'liveness'=>$liveness,
-				'valence'=>$valence,'tempo'=>$tempo,'time_signature'=>$sig,
-				'normal_loudness'=>$norm_loudness,'normal_tempo'=>$norm_tempo,
-				'normal_time_signature'=>$norm_sig,'normal_popularity'=>$norm_pop,
-				'album_image_url'=>$album_img
-			);
-			 */
+		while($r = $query->fetch()){
 			// push output to rows array
 			/* note: need to replace â€™; encoding assumed ISO-8859-1, so when query result is set
-			 * to UTF-8, right single quotes (') are set to â€™ by mistake
-			 */
-			array_push($rows, str_replace('â€™',"'",$r));
+			* to UTF-8, right single quotes (') are set to â€™ by mistake
+			*/
+			$output = array('id'=>$id,'title'=>$title,'album_id'=>$album_id,
+				'album_image_url'=>$album_image_url,'artist_id'=>$artist_id,'artist'=>$artist,
+				'peak_rank'=>$peak_rank,'total_weeks_on_chart'=>$weeks);
+			array_push($rows, str_replace('â€™',"'",$output));
 		}
 		echo json_encode($rows, JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE);
 	}

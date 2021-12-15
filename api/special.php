@@ -21,7 +21,7 @@ case 'GET':
 	$general = "select * from songs where title like '%$string%' or artist like '%$string%' order by
 	peak_rank asc";
 	 */
-	$query = " select a.name, a.id, a.artists from song_info as a, 
+	$query = $conn->prepare("select a.name, a.id, a.artists from song_info as a, 
 			(select a.name, POWER( POWER (POWER( a.danceability - b.danceability , 2), .5 ) + 
 				POWER (POWER( a.normal_loudness - b.normal_loudness , 2), .5 ) + 
 					POWER (POWER( a.acousticness - b.acousticness , 2), .5 ) + 
@@ -33,28 +33,25 @@ case 'GET':
 											POWER (POWER( a.normal_time_signature - b.normal_time_signature , 2), .5 ), .5) as minkowski_similarity, a.popularity, a.id 
 												from song_info as a, 
 														(select * from song_info as a, 
-																	(select max(popularity) as max_popularity from song_info where name like '%$string%') as b where a.popularity = b.max_popularity and name like '%$string%') as b 
+																	(select max(popularity) as max_popularity from song_info where name like ?) as b where a.popularity = b.max_popularity and name like ?) as b 
 																				order by popularity desc, minkowski_similarity desc) 
-																							as b where a.release_date < DATE_ADD('$date', INTERVAL -9 MONTH) 
-																										and a.release_date > DATE_ADD('$date', INTERVAL -18 MONTH) and a.id = b.id 
-																													limit 10;
-	";
-	$result = $conn->query($query);
-	if (!$result){
-		// TODO: report error
-	}
-	else if ($method == 'GET'){
+																							as b where a.release_date < DATE_ADD(?, INTERVAL -9 MONTH) 
+																										and a.release_date > DATE_ADD(?, INTERVAL -18 MONTH) and a.id = b.id 
+																										limit 10;");
+	if ($query){  
+		$param = '%' . $string . '%'; // need to concatenate wildcards to string to add to query
+		$query->bind_param("ssss",$param,$param,$date,$date);
+		$query->execute();
+		$query->bind_result($title,$id,$artists);
+		$query->store_result();
+
 		$rows = array();
-		while($r = $result->fetch_assoc()){
-			// push output to rows array
+		while($r = $query->fetch()){
 			// push output to rows array
 			/* note: need to replace â€™; encoding assumed ISO-8859-1, so when query result is set
-			 * to UTF-8, right single quotes (') are set to â€™ by mistake
-			 */
-			$id = $r['id'];
-			$name = $r['name'];
-			$artist = $r['artists'];
-			$output = array('id'=>$id,'name'=>$name,'artist'=>$artist);
+			* to UTF-8, right single quotes (') are set to â€™ by mistake
+			*/
+			$output = array('id'=>$id,'name'=>$title,'artist'=>$artists);
 			array_push($rows, str_replace('â€™',"'",$output));
 		}
 		echo json_encode($rows, JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE);
