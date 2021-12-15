@@ -23,26 +23,35 @@ const SongDetail = () => {
 	
 	return (
 		<div>
-			<div>
-				<img src={song.album_image_url} width="500px" align="center" alt="album-cover"/>
+			<div className="detail-container">
+			<img className="detail-img"
+			src={song.album_image_url} width="500px" align="center" alt="album-cover"/>
+			<span className="song-details">
+				<h1>{song.title}</h1>
+				<h2>{song.artist} — {song.album}</h2>
+				<h2>Charted for {song.total_weeks_on_chart} weeks</h2>
+				<h2>Peaked at #{song.peak_rank}</h2>
+			</span>
 			</div>
-			<h3>Recommended Songs</h3>
-			{recs.length > 0 && (
-				<ul>
+			{recs.length > 0 ? (
+				<>
+				<h2>Recommended Songs</h2>
+				<ul className="song-list">
 					{recs.map((rec) => (
-						<li key={rec.id}>
-						<Link to={{pathname:`/songs/${rec.id}`,state: {song: rec}}}>
-							<img className="list-image" src={rec.album_image_url} width="2%" alt="album-cover"/> &#160;
-							<b>{rec.title}</b> &#160;
-							Artist: {rec.artist} &#160;
-							Album: {rec.album} &#160;
-							<br />
-							<br/>
+						<li className="item-container" key={rec.id}>
+						<Link className="link item-link" to={{pathname:`/songs/${rec.id}`,state: {song: rec}}}>
+						<div className="box-detail">
+							<img className="item-img" src={rec.album_image_url} width="2%" alt="album-cover"/> &#160;
+							<span><h1>{rec.title}</h1>
+							<h2>{rec.artist} — {rec.album}</h2>
+							</span>
+						</div>
 						</Link>
 						</li>
 					))}
 				</ul>
-			)}
+				</>
+			):<></>}
 		</div>
 	);
 	/*

@@ -75,14 +75,16 @@ const SearchList = () => {
 			{songs.map((song) => (
 				<li className="item-container" key={song.id}>
 				<Link className="link item-link" to={{pathname:`/songs/${song.id}`,state: {song: song}}}>
-					<div className="grid-container">
+					<div className="box-container">
 						<img className="item-img" src={song.album_image_url} width="2%" alt="album-cover"/>
-					<div className="item-title">{song.title}</div>
-					<div className="item-artist">{song.artist}</div>
-					<div className="item-number item-weeks">{song.total_weeks_on_chart}</div>
-					<div>Weeks on Billboard 100</div>
-					<div>Peaked at</div>
-					<div className="item-number item-peak">#{song.peak_rank}</div>
+					<span>
+					<h1 className="item-title">{song.title}</h1>
+					<h2 className="item-artist">{song.artist}</h2>
+					</span>
+					<span><h1 className="item-number item-weeks">{song.total_weeks_on_chart}</h1>
+					<h2>Weeks on Billboard 100</h2></span>
+					<span><h2>Peaked at</h2>
+					<h1 className="item-number item-peak">#{song.peak_rank}</h1></span>
 					</div>
 				</Link>
 				</li>

@@ -57,19 +57,14 @@ const SpecialList = () => {
             {/* display each result */}
             {songs.length > 0 ? (
 		<>
-		<h3>Your parents may have conceived you to</h3>
-		<ul>
+		<h2 className="special-title">Your parents may have gotten down to</h2>
+		<ul className="song-list">
 			{songs.map((song) => (
-				<li key={song.id}>
+				<li className="item-container" key={song.id}>
 				{/*
 				<iframe src={`https://open.spotify.com/embed/track/${song.id}+"?utm_source=generator" width="100%" height="380" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
 				*/}
-				<Link to={{pathname:`/songs/${song.id}`,state: {song: song}}}>
-					<b>{song.name}</b> &#160;
-					by {song.artist}
-					<br />
-					<br/>
-				</Link>
+					<h3>{song.name} — {song.artist}</h3>
 				</li>
 			))}
 		</ul>

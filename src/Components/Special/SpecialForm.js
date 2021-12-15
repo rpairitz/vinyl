@@ -20,16 +20,17 @@ const SpecialForm = ({ info, onChange, onSubmit }) => {
                     <label>Parents&rsquo; Favorite Song Title (optional)</label>
                     <br />
                     <input
+		    	placeholder="e.g. Mo Bamba"
                         type="text"
                         className="form-control"
-                        id="string-input"
+                        id="special-string-input"
                         value={info.string}
                         onChange={onChange}
                         name="string"
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>
+                    <button type="submit" className="btn" onSubmit={onSubmit}>
                         Search
                     </button>
                 </div>
