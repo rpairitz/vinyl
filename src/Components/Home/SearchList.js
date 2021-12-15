@@ -70,24 +70,25 @@ const SearchList = () => {
                 onSubmit={onSubmitHandler}
             />
             {/* display each result */}
-            {songs.length > 0 && (
-		<ul>
+            {songs.length > 0 ? (
+		<ul className="song-list">
 			{songs.map((song) => (
-				<li key={song.id}>
-				<Link to={{pathname:`/songs/${song.id}`,state: {song: song}}}>
-					<img className="list-image" src={song.album_image_url} width="2%" alt="album-cover"/> &#160;
-					<b>{song.title}</b> &#160;
-					Artist: {song.artist} &#160;
-					Album: {song.album} &#160;
-					Peak Rank: {song.peak_rank} &#160;
-					Weeks on Billboard 100: {song.total_weeks_on_chart}
-					<br />
-					<br/>
+				<li className="item-container" key={song.id}>
+				<Link className="link item-link" to={{pathname:`/songs/${song.id}`,state: {song: song}}}>
+					<div className="grid-container">
+						<img className="item-img" src={song.album_image_url} width="2%" alt="album-cover"/>
+					<div className="item-title">{song.title}</div>
+					<div className="item-artist">{song.artist}</div>
+					<div className="item-number item-weeks">{song.total_weeks_on_chart}</div>
+					<div>Weeks on Billboard 100</div>
+					<div>Peaked at</div>
+					<div className="item-number item-peak">#{song.peak_rank}</div>
+					</div>
 				</Link>
 				</li>
 			))}
 		</ul>
-            )}
+            ):<h1>No results</h1>}
         </div>
     );
 };

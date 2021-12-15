@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+body {
+ background-color: #000;
+ color: #999999;
+ margin:0;
+ padding-right:5.44%;
+ padding-left: 5.44%;
+ font-family: "DIN Alternate";
+ text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul {
+ list-style-type: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-item.logo-container {
+ padding-bottom:20px;
+ background-color:#000;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav {
+  background-color: #000;
+  padding:0;
+  margin-bottom:0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 34.3px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-item {
+ padding:6.18px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo {
+ width: 280.14px;
+ height: 100%;
+}
+
+.nav-item.small-nav-item{
+ font-size: 8.09px;
+ color: #7C7C7C;
+ padding: 7px;
+}
+
+.link {
+  color: #999999;
+  text-decoration: none;
+}
+
+.link:hover {
+ color: #CCCCCC;
+}
+
+.link.special-link {
+ text-decoration: underline;
+}
+
+/* search bar */
+#search-string-input {
+	width:61.8%;
+	background-color: #000;
+	border: 1px solid #464646;
+	border-radius: 22.8px;
+	font-family: "DIN Alternate";
+	font-size: 55.5px;
+	color:#CCCCCC;
+	padding-top: 16px;
+	padding-left: 53px;
+	padding-bottom:16px;
+	padding-right:53px;
+	margin:21px;
+}
+
+#search-string-input::-webkit-input-placeholder {
+	color: #464646;
+}
+#search-string-input::-moz-placeholder {
+	color: #464646;
+}
+#search-string-input::-ms-input-placeholder {
+	color: #464646;
+}
+#search-string-input:-moz-placeholder {
+	color: #464646;
+}
+.btn.search-btn {
+	display: none;
+}
+
+/* search list */
+.song-list {
+ margin:0;
+ padding:0;
+}
+
+.item-container {
+ width: 100%;
+ padding:13px;
+}
+
+.grid-container {
+ display: grid;
+ gap: 21px;
+ grid-template-columns:14.6% 13px 1fr 14.6% 23.6% 1fr 14.6%;
+ grid-template-rows: 1fr 13px; 
+}
+
+.item-img{
+ width: 100%;
+ grid-column-start:1;
+ grid-column-end:2;
+ grid-row-start:1;
+ grid-row-end:1;
+}
+.item-title{
+	grid-column: 2/3;
+	grid-row: 1/1;
+	font-size: 34.3px;
+	text-align: left;
+}
+.item-artist{
+	grid-column: 2/3;
+	grid-row: 2/2;
+	font-size: 21.2px;
+	text-align: left;
+	color: #666666;
+}
+.item-number{
+	font-size: 55.5px;
+}
+.item-weeks{
+	grid-column: 2/3;
+	grid-row: 1/1;
+	text-align:right;
+}
+.item-peak{
+	grid-column: 2/3;
+	grid-row: 1/1;
+	text-align:left;
 }

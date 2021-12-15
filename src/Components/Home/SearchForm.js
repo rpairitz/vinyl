@@ -2,12 +2,9 @@
 const SearchForm = ({ searchString, onChange, onSubmit }) => {
     return (
         <div>
-            <h2>Song Search</h2>
             <form onSubmit={onSubmit} autoComplete="off">
-                <div className="form-group">
-                    <label>Song Title or Artist</label>
-                    <br />
                     <input
+		    	placeholder="Search by Title or Artist…"
                         type="text"
                         className="form-control"
                         id="search-string-input"
@@ -15,12 +12,9 @@ const SearchForm = ({ searchString, onChange, onSubmit }) => {
                         onChange={onChange}
                         name="string"
                     />
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>
+                    <button type="submit" className="btn search-btn" onSubmit={onSubmit}>
                         Search
                     </button>
-                </div>
             </form>
         </div>
     );
